@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slackr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- You can add your styles and scripts here -->
+  <!-- add bootstrap link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
+  <script type="module" src="src/helpers.js"></script>
+</head>
+
+<body>
+  <!-- This is an example app structure, you can modify this as much as you choose -->
+  <main role="main">
+    <!-- app goes here -->
+    <!-- page-register -->
+    <div id="page-register" class="page-block">
+      <!-- logo header -->
+      <div class="d-flex p-3 bg-black bg-opacity-75 align-items-center"  style="height: 6vh;">
+        <img src="assets/logo.png" alt="logo" width="80rem"/><br>
+      </div>
+      <!-- main card -->
+      <div class="d-flex justify-content-center align-items-center" style="height: 94vh;">
+        <div class="card mb-3 center-box">
+          <div class="card-body" style="margin: 3rem 5rem;">
+            <h3>Register</h3><br><br>
+            <form id="register-form">
+              <!-- value="zid@unsw.edu.au" -->
+              <h5>Email:</h5>
+              <input type="email" placeholder="zid@unsw.edu.au" id="register-email"><br> 
+              <br><h5>Name:</h5>
+              <input type="text" placeholder="name" id="register-name"><br>
+              <br><h5>Password:</h5>
+              <input type="password" placeholder="password" id="register-password"><br>
+              <br><h5>Password (confirm):</h5>
+              <input type="password" placeholder="password" id="register-password-confirm"><br><br>
+              <button class="btn btn-primary" type="button" id="register-submit">Register</button>
+              <p class="card-text"><small class="text-body-secondary">Already registered? <a href="#" class="redirect" redirect="login">Login</a></small></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- page login -->
+    <div id="page-login" class="page-block">
+      <!-- logo header -->
+      <div class="d-flex p-3 bg-black bg-opacity-75 align-items-center"  style="height: 6vh;">
+        <img src="assets/logo.png" alt="logo" width="80rem"/><br>
+      </div>
+      <!-- main card -->
+      <div class="d-flex justify-content-center align-items-center" style="height: 94vh;">
+        <div class="card mb-3 center-box">
+          <div class="card-body" style="margin: 2rem 2rem;">
+            <h3>Login</h3><br><br>
+            <form id="login-form">
+              <h5>Email:</h5>
+              <input type="email" placeholder="zid@unsw.edu.au" id="login-email"><br>
+              <br><h5>Password:</h5>
+              <input type="password" placeholder="password" id="login-password"><br><br>
+              <button class="btn btn-primary" type="button" id="login-submit">Login</button>
+              <p class="card-text"><small class="text-body-secondary">Not yet a member? <a href=""> <a href="#" class="redirect" redirect="register">Register</a></small></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- page dashboard -->
+    <div id="page-dashboard" class="page-block">
+      <!-- new message notifications -->
+      <div id="toast-container">
+
+      </div>
+      <!-- notification template -->
+      <div id="toast-template" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+        <div class="toast-header">
+          <strong class="me-auto">Notification</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Hello from Toast 1!
+        </div>
+      </div>
+
+      <div class="d-flex p-3 bg-black bg-opacity-75 align-items-center" style="height: 6vh;">
+        <img src="assets/logo.png" alt="logo" height="27vh"/><br>
+      </div>
+      <div class="dashboard-container">
+        <div class="dashboard-catalog">
+
+          <!-- template for list channel -->
+          <p id="channel-template" class="channel-style">
+            <a class="link-secondary link-underline-opacity-25 link-underline-opacity-100-hover text-white fs-6" href="#" data-bs-toggle="button">
+              # Default link
+            </a>
+            &nbsp; <i class="bi bi-check-circle-fill" style="display: none;"></i>
+          </p>
+
+          <div id="public-channel" class="channel-list">
+            <p>📣 Public channel</p>
+          </div>
+          <div id="private-channel" class="channel-list">
+            <p><br>🗣️ Private channel</p>
+          </div>
+
+
+          <!-- create new channel link -->
+          <p class="channel-list"><a href="#" class="link-light link-underline-opacity-25 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#createChannelModal">Create a new channel</a></p>
+
+          <!-- profile sidebar -->
+          <div id="account-profile" class="channel-list">
+            <p><br>📄 Profile</p>
+            <p class="profile-style">
+              <a id="update-profile" class="link-secondary link-underline-opacity-25 link-underline-opacity-100-hover text-white " href="#" data-bs-toggle="modal" data-bs-target="#ownProfileModal">
+                <i class="bi bi-person"></i>&nbsp; 
+                View & Update
+              </a>
+            </p>
+            <p id="logout" class="profile-style">
+              <a class="link-secondary link-underline-opacity-25 link-underline-opacity-100-hover text-white" href="#">
+                <i class="bi bi-box-arrow-right"></i> &nbsp;
+                Log out 
+              </a>
+            </p>
+          </div>
+
+
+          <!-- Modal for own profile-->
+          <div class="modal fade" id="ownProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <p class="modal-title fs-5" id="exampleModalLabel">View & Update profile</p>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                  <form class="row g-3 d-flex align-items-center" id="own-profile-form">
+                    <!-- photo -->
+                    <div class="col-md-6">
+                      <img id="own-profile-photo" src="assets/default_profile_photo2.png" alt="" width=60%>
+                    </div>
+                    <!-- upload photo -->
+                    <div class="col-md-6 ">
+                      <label for="photo-file" class="form-label">Uploade a new photo</label>
+                      <input class="form-control" type="file" id="photo-file">
+                    </div>
+                    <!-- name -->
+                    <div class="col-md-6">
+                      <label for="own-profile-name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="own-profile-name" placeholder="name">
+                    </div>
+                    <div class="col-md-6" style="display: none;">
+                      <label for="own-profile-current-name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="own-profile-current-name" placeholder="name">
+                    </div>
+                    <!-- email -->
+                    <div class="col-md-6">
+                      <label for="own-profile-email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="own-profile-email">
+                    </div>
+                    <div class="col-md-6"  style="display: none;">
+                      <label for="own-profile-current-email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="own-profile-current-email">
+                    </div>
+
+                    <!-- password -->
+                    <div class="col-12">
+                      <label class="form-label">New Password</label>
+                      <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="own-profile-password">
+                        <!-- <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+                        <span id="password-eye-noslash" class="input-group-text password-eye"><i class="bi bi-eye-fill"></i></span>
+                        <span id="password-eye-slash" class="input-group-text password-eye" style="display: none;"><i class="bi bi-eye-slash-fill"></i></span>
+                      </div>
+                    </div>
+
+                    <!-- bio -->
+                    <div class="col-12">
+                      <label for="own-profile-bio" class="form-label">Bio</label>
+                      <textarea style="height: 10vh;" class="form-control" id="own-profile-bio"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="own-profile-submit">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal for create new channel-->
+          <div class="modal fade" id="createChannelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <p class="modal-title fs-5" id="exampleModalLabel">Create a new channel</p>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="create-channel-modal-form">
+
+                    <div class="col-12">
+                      <label class="create-channel-name">Channle name: </label>
+                      <input type="text" class="form-control" id="create-channel-name" placeholder="name">
+                    </div>
+
+                    <div class="col-12">
+                      <label for="create-channel-type" class="form-label">Channel type:</label>
+                      <select id="create-channel-type" name="create-channel-type" class="form-control">
+                        <option value="public">public</option>
+                        <option value="private">private</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="create-channel-description" class="form-label">Channel description (optional):</label>
+                      <textarea style="height: 10vh;" class="form-control" placeholder="description (optional)" id="create-channel-description"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="create-channel-submit">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- dashboard channel -->
+        <div id="dashboard-content">
+          <!-- welcome page -->
+          <div id="channel-welcome-page" class="channel-page-block" style="display: block;">
+            <div style="height: 94vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+              <h1>👋 Welcome to Slackr</h1><br>
+              <h2> Choose a channel to start.</h2>
+            </div>
+          </div>
+
+          <!-- join page -->
+          <div id="channel-join-page" class="channel-page-block">
+            <div>
+              <h2 style="height: 94vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <span class="inaccessible-content">Authorised user is not a member of this channel: </span> <br> <br>
+                <button type="button" class="btn btn-primary" id="join-channel-button">Join this channel</button>
+              </h2>
+            </div>
+          </div>
+
+          <!-- member in the channel can access to the actual detailed channel page -->
+          <div id="channel-page-layout" class="channel-page-block">
+            <div id="channel-page-container">
+              <!-- channel header -->
+              <div id="channel-page-header" style="border-bottom: 1px solid #000;">
+                <!-- channel information -->
+                <div class="channel-header-detail">
+                  <span class="fs-2 show-channel-name">channel name</span> 
+                </div>
+              </div>
+              <div style="padding: 1vh 0; border-bottom: 1px solid #000;">
+                <div id="channel-header-function" class="btn-group me-2 " role="group" style="padding-left: 2vw; width: 2vw;">
+                  <!-- channel icons -->
+                  <button type="button" class="btn btn-outline-secondary" id="channel-details" data-bs-toggle="modal" data-bs-target="#ChannelDetailsModal"><i class="bi bi-file-text"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="channel-edit" data-bs-toggle="modal" data-bs-target="#editChannelModal"><i class="bi bi-pencil-square"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="channel-leave"><i class="bi bi-box-arrow-right"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="channel-invite" data-bs-toggle="modal" data-bs-target="#inviteModal"><i class="bi bi-person-plus-fill"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="channel-member" data-bs-toggle="modal" data-bs-target="#memberModal"><i class="bi bi-people-fill"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="channel-pinned"><i class="bi bi-pin-fill"></i></button>
+                </div>
+              </div>
+
+              <!-- channel message -->
+              <div id="channel-page-message">
+              </div>
+              
+              <!-- channel message template -->
+              <div id="single-message-template" class="single-message">
+                <div class="message-style">
+                  <div class="message-photo">
+                    <img src="assets/default_profile_photo2.png" class="message-photo-image"> &nbsp;&nbsp;
+                  </div>
+                  <div class="message-main">
+                    <div class="message-detail">
+                      <div class="message-time-edit">
+                        <span class="fw-bold message-sender">sender name</span> &nbsp;&nbsp;
+                        <span class="fw-lighter message-time">
+                          <small class="message-small-time">send time</small> &nbsp;&nbsp;
+                          <small class="fst-italic message-small-edit" style="display: none;">Edited</small>
+                        </span>
+                        <div class="message-function">
+                          <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                            <!-- own message: delete -->
+                            <button type="button" class="btn btn-outline-secondary message-function-button message-delete" style="display: none;"><i class="bi bi-trash"></i></button>
+                            <!-- own message: edit -->
+                            <button type="button" class="btn btn-outline-secondary message-function-button message-edit" data-bs-toggle="modal" data-bs-target="#editMessage" style="display: none;"><i class="bi bi-pencil-square"></i></button>
+                            <button type="button" class="btn btn-outline-secondary message-function-button image-edit" data-bs-toggle="modal" data-bs-target="#editImage" style="display: none;"><i class="bi bi-pencil-square"></i></button>
+                            <!-- pin -->
+                            <button type="button" class="btn btn-outline-secondary message-function-button unpinned" style="display: block;"><i class="bi bi-pin"></i></button>
+                            <button type="button" class="btn btn-outline-secondary message-function-button pinned" style="display: none;"><i class="bi bi-pin-fill"></i></button>
+                            <button type="button" class="btn btn-outline-secondary message-function-button react-heart">❤️ 0</button>
+                            <button type="button" class="btn btn-outline-secondary message-function-button react-joy">😄 0</button>
+                            <button type="button" class="btn btn-outline-secondary message-function-button react-tears">😂 0</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="message-content fw-medium" >
+                      <p class="message-text" style="display: none;">this is a message</p>
+                      <img class="message-img" src="" alt="message" style="width: 8vw; display: none;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- chat box: sent message or image -->
+              <div id="channel-page-box">
+                <div class="input-group">
+                  <input id="message-input" type="text" class="form-control" placeholder="Type message">
+                  <button id="message-send" class="btn btn-outline-secondary" type="button" disabled><i class="bi bi-send"></i></button>
+                  <div class="input-group-append">
+                    <label for="image-send" class="btn btn-outline-secondary"><i class="bi bi-image"></i> </label>
+                    <input type="file" id="image-send" style="display: none;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- show channel details-->
+        <div class="modal fade" id="ChannelDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <p class="modal-title fs-5" id="exampleModalLabel">Channel details</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <ul id="channel-details-body" class="list-group list-group-flush">
+                  <!-- add public channel here -->
+                  <li class="list-group-item user-profile-channel">
+                    <span class="channel-details-line">Name: </span> <br>
+                    <span class="show-channel-name-modal">channel name</span>
+                  </li>
+                  <li class="list-group-item user-profile-channel">
+                    <span class="channel-details-line">Channel type: </span> <br>
+                    <span class="show-channel-type">channel type</span>
+                  </li>
+                  <li class="list-group-item user-profile-channel">
+                    <span class="channel-details-line">Created on: </span> <br>
+                    <span class="show-channel-time"> created time</span>
+                  </li>
+                  <li class="list-group-item user-profile-channel">
+                    <span class="channel-details-line">Created by: </span> <br>
+                    <span class="show-channel-creator">creator</span>
+                  </li>
+                  <li class="list-group-item user-profile-channel">
+                    <span class="channel-details-line">Description: </span> <br>
+                    <span class="show-channel-description">description</span>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="edit-channel-submit">Edit</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal for channel images-->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
+              <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body d-flex justify-content-center">
+                <img id="image-show" src="">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="prev-image"><i class="bi bi-arrow-bar-left"></i></button>
+                <button type="button" class="btn btn-primary" id="next-image"><i class="bi bi-arrow-bar-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal for members-->
+        <div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Channel Members</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- add members here -->
+                <ul id="member-body" class="list-group list-group-flush">
+
+                </ul>
+              </div>
+              <!-- template set displat: none -->
+              <li id="member-template" class="list-group-item">
+                <img class="user-photo" src="assets/default_profile_photo2.png" alt="photo" width="30vw"> 
+                <span class="user-information">user name (user email)</span>
+              </li>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal for invite users-->
+        <div class="modal fade" id="inviteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Invite users</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div id="invite-body" class="modal-body">
+
+              </div>
+              <!-- template set displat: none -->
+              <div id="user-template" class="user-invite">
+                <input type="checkbox" class="btn-check user-check" id="btn-check-2-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary col-12 text-start user-block" for="btn-check-2-outlined">
+                  <img class="user-photo" src="assets/default_profile_photo2.png" alt="photo" width="30vw"> 
+                  <span class="user-information">user name (user email)</span>
+                  <span class="user-checked" style="display: none;"><i class="bi bi-check-circle-fill"></i></span>
+                  <span class="user-id" style="display: none;"></span>
+                </label><br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="invite-submit">Invite</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal for pinned messages    data-bs-backdrop="static"-->
+        <div class="modal fade" id="pinnedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Pinned Messages</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div id="pinned-message-body" class="modal-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal for user profile-->
+        <div class="modal fade" id="userProfile" tabindex="-1" aria-labelledby="fullScreenModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="fullScreenModalLabel" style="font-weight: bolder;">User Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div id="user-profile-content" class="modal-body user-profile">
+                <div id="user-basic-detail">
+                  <div class="card">
+                    <img id="user-profile-photo" src="assets/default_profile_photo2.png" class="card-img-top" alt="photo" >
+                    <div class="card-body">
+                      <h5 class="card-title">Name:</h5>
+                      <p id="user-profile-name" class="card-text">Susie</p>
+                      <h5 class="card-title">Email:</h5>
+                      <p id="user-profile-email" class="card-text">email@...</p>
+                      <a id="edit-own-profile" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ownProfileModal">Go to edit my profile</a>
+                    </div>
+                  </div>
+                </div>
+                <div id="user-more-detail">
+                  <!-- user bio -->
+                  <div class="card" style="width: 62vw; margin-bottom: 4vh;">
+                    <div class="card-header" style="font-weight: bold;">
+                      Bio
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li id="user-profile-bio" class="list-group-item">Hello! I'm here to connect, share, and learn. Feel free to say hi! 😊</li>
+                    </ul>
+                  </div>
+                  <!-- common channels -->
+                  <div class="card" style="width: 62vw; margin-bottom: 4vh;">
+                    <div id="public-header" class="card-header" style="font-weight: bold;">
+                      Your common public channels
+                    </div>
+                    <ul id="common-public" class="list-group list-group-flush">
+                      <!-- add public channel here -->
+                    </ul>
+                  </div>
+                  <div class="card" style="width: 62vw;">
+                    <div id="private-header" class="card-header" style="font-weight: bold;">
+                      Your common private channels
+                    </div>
+                    <ul id="common-private" class="list-group list-group-flush">
+                      <!-- add private channel here -->
+                    </ul>
+                    <li id="template-common-channel" class="list-group-item user-profile-channel">channel 1</li>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal for edit a channel-->
+        <div class="modal fade" id="editChannelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <p class="modal-title fs-5" id="exampleModalLabel">Edit channel</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-channel-modal-form">
+
+                  <div class="col-12">
+                    <label for="edit-channel-name" class="form-label">Channle name: </label>
+                    <input type="text" class="form-control" id="edit-channel-name" placeholder="name">
+                  </div>
+                  <div class="col-12">
+                    <label for="edit-channel-description" class="form-label">Channel description:</label>
+                    <textarea style="height: 10vh;" class="form-control" placeholder="description (optional)" id="edit-channel-description"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="edit-channel-submit">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal for edit message-->
+        <div class="modal fade" id="editMessage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-message-body-form">
+                  <!-- select message type -->
+                  <p>Select edited message type</p>
+                  <select id="edit-message-select" class="form-select" aria-label="Default select example">
+                    <option value="Text">Text</option>
+                    <option value="Image">Image</option>
+                  </select><br>
+                  <!-- edit message input -->
+                  <input id="edit-message-input" type="text" class="form-control" placeholder="Message" aria-label="Username" aria-describedby="basic-addon1">
+                  <input id="edit-image-input" type="file" style="display: none;">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="edit-message-submit" type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      </div>
+
+    </div>
+
+
+  </main>
+  <!-- <footer>
+    <p>&copy; Slackr</p>
+  </footer> -->
+  <!-- add bootstrap link -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/message.js"></script>
+  <script type="module" src="src/user.js"></script>
+  <script type="module" src="src/url.js"></script>
+</body>
+
+</html>
