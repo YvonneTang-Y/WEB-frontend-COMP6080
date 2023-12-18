@@ -16,7 +16,11 @@ COMP6080 is a challenging course. Front-end development is unlike most things yo
 
 ## Outcomes
 CLO1 : Able to apply Javascript semantics to design, construct, test and debug programs holistically
+
 CLO2 : Construct programs for web-front end with HTML, CSS, and DOM manipulation
+
 CLO3 : Use Javascript and CSS frameworks to allow more efficient integration of existing code and components into a final product
+
 CLO4 : Build stable applications that utilise concurrent programming through use of Javascript's asynchronous programming techniques
+
 CLO5 : Design and build interfaces that focus on best user experience and accessible design practices
