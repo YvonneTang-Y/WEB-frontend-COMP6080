@@ -1,0 +1,55 @@
+body {
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+#loginBtn {
+    background-color: #008489;
+    color: white;
+    font-weight: bold;
+    height: 57px;
+    width: 112px;
+    font-size: 18pt;
+    /* padding: 10px, 20px; */
+    border: 0px;
+    border-radius: 3px;
+}
+
+#signupBtn {
+    background-color: white;
+    color: #008489;
+    font-weight: bold;
+    height: 57px;
+    width: 122px;
+    font-size: 18pt;
+    /* padding: 10px, 20px; */
+    border: 2px solid #008489;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+#top-section p{
+    font-size: 14pt;
+    margin-bottom: 30px;
+}
+
+#left-section{
+
+}
+#right-section {
+
+}
+
+/* button:nth-child(1) {
+    color: white;
+    background-color: red;
+} */

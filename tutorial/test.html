@@ -1,0 +1,65 @@
+<style>
+#mit {
+    color: red;
+    font-size: 2em;
+    font-family: Arial;
+}
+#rhythm {
+    background: black;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border-radius: 2000px;
+}
+#page {
+    font-family: Arial;
+}
+#cactus {
+    border-radius: 5px;
+    background: rgb(220, 220, 255);
+    border: 0;
+    padding: 5px;
+}
+</style>
+
+
+Hello
+<div id="page">
+    <h3>Hello</h3>
+    <div id="rhythm">
+        <img src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo _white.svg" />
+    </div>
+    <button id="cactus">Show me the studio!</button>
+    <i>Weeee</i>
+    <p><font color="red">Hello color</font></p>
+    <p id="mit"><font color="red">Hello color2</font></p>
+    <!-- rolling line -->
+    <marquee>
+        <blink>
+            😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊
+        </blink>
+        
+    </marquee>
+    <table>
+        <!-- for one line -->
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+    function fn() {
+        document.getElementById('rhythm').style.background = 'balck';
+    }
+    document.getElementById('cactus').addEventListener('click', fn);
+</script>

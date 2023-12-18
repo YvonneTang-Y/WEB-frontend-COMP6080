@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="createTimer">Create timer!</button>
+  <div id="timers"></div>
+</body>
+
+<script type="text/javascript">
+  const createTimer= () => {
+    let time = 0;
+    return {
+      getTime: function () {
+        return time;
+      },
+      incTime: function () {
+        time++;
+      }
+    }
+  };
+
+  document.getElementById('createTimer').addEventListener('click', () => {
+    const thisTimer = createTimer();
+    const newTimer = document.createElement('div');
+    const updateText = () => newTimer.innerText = thisTimer.getTime();
+    setInterval(() => {
+      thisTimer.incTime();
+      updateText();
+    }, 1000);
+    updateText;
+    document.getElementById('timers').appendChild(newTimer);
+  });
+</script>
+</html>
