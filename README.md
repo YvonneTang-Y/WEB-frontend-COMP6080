@@ -2,7 +2,9 @@
 
 ## Learning Materials
 [Webcms3](https://webcms3.cse.unsw.edu.au/COMP6080/23T3/)
+
 [Lecture Website](https://cgi.cse.unsw.edu.au/~cs6080/23T3/course-outline)
+
 [YouTube Hayden](https://www.youtube.com/@haydensmith369)
 
 ## Course Summary
